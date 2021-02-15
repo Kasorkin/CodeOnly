@@ -4,7 +4,7 @@ using System.Drawing.Text;
 namespace ds.test.impl
 {
     /// <summary>
-    /// Требуемый в т.з. интерфейс
+    /// Требуемый интерфейс
     /// </summary>
     public interface IPlugin
     {
@@ -35,6 +35,7 @@ namespace ds.test.impl
         private readonly string version = "0.1";
         private readonly string description = "Просто сумма";
         private System.Drawing.Image image = ds.test.impl.Properties.Resources._111;
+
         public override string PluginName => name;
         public override string Version => version;
         public override System.Drawing.Image Image => image;
@@ -42,7 +43,6 @@ namespace ds.test.impl
 
         public override int Run(int input1, int input2)
         {
-            bool _error = false;
             int res = 0;
             try
             {
@@ -51,12 +51,9 @@ namespace ds.test.impl
             catch
             {
                 Console.WriteLine("Ошибка перевыполнения, возвращен 0");
-                _error = true;
-            }
-            if (!_error)
-                return res;
-            else
                 return 0;
+            }
+            return res;
         }
     }
     /// <summary>
@@ -68,13 +65,14 @@ namespace ds.test.impl
         private readonly string version = "0.1";
         private readonly string description = "Просто вычитание";
         private readonly System.Drawing.Image image = ds.test.impl.Properties.Resources._222;
+
         public override string PluginName => name;
         public override string Version => version;
         public override System.Drawing.Image Image => image;
         public override string Description => description;
+
         public override int Run(int input1, int input2)
         {
-            bool _error = false;
             int res = 0;
             try
             {
@@ -83,12 +81,9 @@ namespace ds.test.impl
             catch
             {
                 Console.WriteLine("Ошибка перевыполнения, возвращен 0 ");
-                _error = true;
-            }
-            if (!_error)
-                return res;
-            else
                 return 0;
+            }
+            return res;
         }
     }
     /// <summary>
@@ -100,10 +95,12 @@ namespace ds.test.impl
         private readonly string version = "0.1";
         private readonly string description = "Просто умножение";
         private readonly System.Drawing.Image image = ds.test.impl.Properties.Resources._333;
+
         public override string PluginName => name;
         public override string Version => version;
         public override System.Drawing.Image Image => image;
         public override string Description => description;
+
         public override int Run(int input1, int input2)
         {
             return input1 * input2;
@@ -118,13 +115,14 @@ namespace ds.test.impl
         private readonly string version = "0.1";
         private readonly string description = "Просто деление";
         private readonly System.Drawing.Image image = ds.test.impl.Properties.Resources._444;
+
         public override string PluginName => name;
         public override string Version => version;
         public override System.Drawing.Image Image => image;
         public override string Description => description;
+
         public override int Run(int input1, int input2)
         {
-            bool _error = false;
             int res = 0;
             try
             {
@@ -133,12 +131,9 @@ namespace ds.test.impl
             catch
             {
                 Console.WriteLine("Ошибка деления, возвращен 0");
-                _error = true;
-            }
-            if (!_error)
-                return res;
-            else 
                 return 0;
+            }
+            return res;
         }
     }
     /// <summary>
