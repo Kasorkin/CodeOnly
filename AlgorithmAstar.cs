@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Реализация алгоритма А* для 2D игры в Unity
+/// РџРѕРёСЃРє РїСѓС‚Рё РїРѕ Р°Р»РіРѕСЂРёС‚РјСѓ Рђ* РґР»СЏ РїСЂРѕРµРєС‚Р° Unity2D
+/// РљРѕРґРёСЂРѕРІРєР° РёР· СЋРЅРёС‚Рё СЃР»РµС‚РµР»Р°, РїРѕС‚РѕРјСѓ СЏ РІРєСЂР°С‚С†Рµ Р·РґРµСЃСЊ РѕРїРёС€Сѓ
+/// Р”Р°РЅРЅС‹Р№ Р°Р»РіРѕСЂРёС‚Рј РїРѕР·РІРѕР»СЏРµС‚ СЂР°Р±РѕС‚Р°С‚СЊ СЃ РїРѕРёСЃРєРѕРј РїСѓС‚Рё РєР°Рє РІ РїРѕС€Р°РіРѕРІС‹С… РёРіСЂР°С…, С‚Р°Рє Рё РІ РёРіСЂР°С… РІ СЂРµР°Р»СЊРЅРѕРј РІСЂРµРјРµРЅРё
+/// РРјРµРµС‚СЃСЏ СЃС‚Р°РЅРґР°СЂС‚РЅР°СЏСЂ СЂРµР°Р»РёР·Р°С†РёСЏ Р°Р»РіРѕСЂРёС‚РјР° РїРѕРґ 4 РЅР°РїСЂР°РІР»РµРЅРёСЏ
+/// РўР°РєР¶Рµ, СѓР¶Рµ РєРѕРЅРєСЂРµС‚РЅРѕ РґР»СЏ Unity, РґРѕР±Р°РІР»РµРЅР° РїСЂРѕРІРµСЂРєР° РЅР° РЅР°Р»РёС‡РёРµ РїРѕРёСЃРєР° РїСЂРµРїСЏС‚СЃС‚РІРёР№
+/// РџРѕСЃРєРѕР»СЊРєСѓ РїСѓС‚СЊ СЃРѕС…СЂР°РЅСЏРµС‚СЃСЏ РёР· РєРѕРЅС†Р° РІ РЅР°С‡Р°Р»Рѕ (РїРѕ СЃР°РјРѕРјСѓ Р°Р»РіРѕСЂРёС‚РјСѓ), Р±С‹Р» РґРѕР±Р°РІР»РµРЅ РјРµС‚РѕРґ РєРѕРЅРІРµСЂС‚Р°С†РёРё, С‡С‚РѕР±С‹ РїСѓС‚СЊ Р±С‹Р» РїРµСЂРµСЃРѕС…СЂР°РЅРµРЅ РєР°Рє "РёР· РЅР°С‡Р°Р»Р° РІ РєРѕРЅРµС†"
 /// </summary>
 public static class AlgorithmAstar 
 {
@@ -13,7 +18,7 @@ public static class AlgorithmAstar
     private static Vector2 startPos;
     private static Vector2 endPos;
 
-    //1 - объект, 2 - родитель
+    //1 - Г®ГЎГєГҐГЄГІ, 2 - Г°Г®Г¤ГЁГІГҐГ«Гј
     private static Dictionary<Vector2, Vector2> parents = new Dictionary<Vector2, Vector2>();
 
     public static Dictionary<Vector2, Vector2> SearchA(Vector2 startPosition, Vector2 endPosition)
@@ -27,7 +32,7 @@ public static class AlgorithmAstar
         Dictionary<Vector2, float> generalValue = new Dictionary<Vector2, float>();
         Dictionary<Vector2, float> g = new Dictionary<Vector2, float>();
 
-        //алгоритм
+        //Г Г«ГЈГ®Г°ГЁГІГ¬
         open.Add(startPos);
         g[startPos] = 0;
         generalValue[startPos] = g[startPos];
@@ -36,7 +41,7 @@ public static class AlgorithmAstar
         int minIndex = 0;
         while (true)
         {
-            //находим длины и минимальный элемент из списка открытых
+            //Г­Г ГµГ®Г¤ГЁГ¬ Г¤Г«ГЁГ­Г» ГЁ Г¬ГЁГ­ГЁГ¬Г Г«ГјГ­Г»Г© ГЅГ«ГҐГ¬ГҐГ­ГІ ГЁГ§ Г±ГЇГЁГ±ГЄГ  Г®ГІГЄГ°Г»ГІГ»Гµ
             for (int i = 0; i < open.Count; i++)
             {
                 if (i == 0)
@@ -49,16 +54,16 @@ public static class AlgorithmAstar
                     minIndex = i;
                     min = generalValue[open[i]];
                 }
-                //Debug.Log("Длина "+ open[i] + "-го элемента = " + generalValue[open[i]]);
+                //Debug.Log("Г„Г«ГЁГ­Г  "+ open[i] + "-ГЈГ® ГЅГ«ГҐГ¬ГҐГ­ГІГ  = " + generalValue[open[i]]);
             }
             Vector2 currentPos = open[minIndex];
-            //Debug.Log("Текущая позиция" + currentPos);
+            //Debug.Log("Г’ГҐГЄГіГ№Г Гї ГЇГ®Г§ГЁГ¶ГЁГї" + currentPos);
 
-            //добавили в закрытый и удалили с открытого
+            //Г¤Г®ГЎГ ГўГЁГ«ГЁ Гў Г§Г ГЄГ°Г»ГІГ»Г© ГЁ ГіГ¤Г Г«ГЁГ«ГЁ Г± Г®ГІГЄГ°Г»ГІГ®ГЈГ®
             closed.Add(currentPos);
             open.RemoveAt(minIndex);
 
-            //данные соседей
+            //Г¤Г Г­Г­Г»ГҐ Г±Г®Г±ГҐГ¤ГҐГ©
             //int index = currentPos.GetComponent<FieldData>().UniqueIndex;
             List<Vector2> neighbors = new List<Vector2>(5);
 
@@ -78,41 +83,41 @@ public static class AlgorithmAstar
 
             for (int i = 0; i < 5; i++)
             {
-                //если клетка непроходима или в закрытом, то игнорируем её
+                //ГҐГ±Г«ГЁ ГЄГ«ГҐГІГЄГ  Г­ГҐГЇГ°Г®ГµГ®Г¤ГЁГ¬Г  ГЁГ«ГЁ Гў Г§Г ГЄГ°Г»ГІГ®Г¬, ГІГ® ГЁГЈГ­Г®Г°ГЁГ°ГіГҐГ¬ ГҐВё
                 if (i == 2 || IsBarier(neighbors[i]) || closed.IndexOf(neighbors[i]) != -1)
                     continue;
-                //если клетка не в открытом списке, то добавляем её туда и рассчитываем для неё путь
+                //ГҐГ±Г«ГЁ ГЄГ«ГҐГІГЄГ  Г­ГҐ Гў Г®ГІГЄГ°Г»ГІГ®Г¬ Г±ГЇГЁГ±ГЄГҐ, ГІГ® Г¤Г®ГЎГ ГўГ«ГїГҐГ¬ ГҐВё ГІГіГ¤Г  ГЁ Г°Г Г±Г±Г·ГЁГІГ»ГўГ ГҐГ¬ Г¤Г«Гї Г­ГҐВё ГЇГіГІГј
                 if (open.IndexOf(neighbors[i]) == -1)
                 {
                     open.Add(neighbors[i]);
-                    //текущая клетка = родительская для этой
+                    //ГІГҐГЄГіГ№Г Гї ГЄГ«ГҐГІГЄГ  = Г°Г®Г¤ГЁГІГҐГ«ГјГ±ГЄГ Гї Г¤Г«Гї ГЅГІГ®Г©
                     parents[neighbors[i]] = currentPos;
-                    //считаем стоимость
+                    //Г±Г·ГЁГІГ ГҐГ¬ Г±ГІГ®ГЁГ¬Г®Г±ГІГј
                     g[neighbors[i]] = mass + g[currentPos];
-                    //а теперь общую стоимость
+                    //Г  ГІГҐГЇГҐГ°Гј Г®ГЎГ№ГіГѕ Г±ГІГ®ГЁГ¬Г®Г±ГІГј
                     generalValue[neighbors[i]] = g[neighbors[i]] + Heuristic(neighbors[i]);
-                }//если клетка в открытом списке, то проверяем не дешевле ли будет путь через эту клетку
+                }//ГҐГ±Г«ГЁ ГЄГ«ГҐГІГЄГ  Гў Г®ГІГЄГ°Г»ГІГ®Г¬ Г±ГЇГЁГ±ГЄГҐ, ГІГ® ГЇГ°Г®ГўГҐГ°ГїГҐГ¬ Г­ГҐ Г¤ГҐГёГҐГўГ«ГҐ Г«ГЁ ГЎГіГ¤ГҐГІ ГЇГіГІГј Г·ГҐГ°ГҐГ§ ГЅГІГі ГЄГ«ГҐГІГЄГі
             }
-            //остановка если добавили нужную клетку в открытый список или мы не нашли путь
+            //Г®Г±ГІГ Г­Г®ГўГЄГ  ГҐГ±Г«ГЁ Г¤Г®ГЎГ ГўГЁГ«ГЁ Г­ГіГ¦Г­ГіГѕ ГЄГ«ГҐГІГЄГі Гў Г®ГІГЄГ°Г»ГІГ»Г© Г±ГЇГЁГ±Г®ГЄ ГЁГ«ГЁ Г¬Г» Г­ГҐ Г­Г ГёГ«ГЁ ГЇГіГІГј
             if (open.IndexOf(endPos) == -1 && open.Count == 0)
             {
-                Debug.Log("Путь не обнаружен");
+                Debug.Log("ГЏГіГІГј Г­ГҐ Г®ГЎГ­Г Г°ГіГ¦ГҐГ­");
                 return null;
             }
             else if (open.IndexOf(endPos) != -1)
             {
-                Debug.Log("Путь обнаружен");
+                Debug.Log("ГЏГіГІГј Г®ГЎГ­Г Г°ГіГ¦ГҐГ­");
                 return ConvertWay();
             }
         }
     }
 
-    //пересохраняем путь в обратном порядке
+    //ГЇГҐГ°ГҐГ±Г®ГµГ°Г Г­ГїГҐГ¬ ГЇГіГІГј Гў Г®ГЎГ°Г ГІГ­Г®Г¬ ГЇГ®Г°ГїГ¤ГЄГҐ
     private static Dictionary<Vector2, Vector2> ConvertWay()
     {
         Dictionary<Vector2, Vector2> newWay = new Dictionary<Vector2, Vector2>();
         Vector2 curPos = endPos;
-        //поскольку мы ищем путь "перед точкой", то мы пропускаем последнюю позицию
+        //ГЇГ®Г±ГЄГ®Г«ГјГЄГі Г¬Г» ГЁГ№ГҐГ¬ ГЇГіГІГј "ГЇГҐГ°ГҐГ¤ ГІГ®Г·ГЄГ®Г©", ГІГ® Г¬Г» ГЇГ°Г®ГЇГіГ±ГЄГ ГҐГ¬ ГЇГ®Г±Г«ГҐГ¤Г­ГѕГѕ ГЇГ®Г§ГЁГ¶ГЁГѕ
         //curPos = parents[curPos];
         while (true)
         {
@@ -129,7 +134,7 @@ public static class AlgorithmAstar
         return Vector2.Distance(currentPos, endPos);
     }
 	
-	//проверка на наличие препятствия в следующем квадрате* перехода
+	//ГЇГ°Г®ГўГҐГ°ГЄГ  Г­Г  Г­Г Г«ГЁГ·ГЁГҐ ГЇГ°ГҐГЇГїГІГ±ГІГўГЁГї Гў Г±Г«ГҐГ¤ГіГѕГ№ГҐГ¬ ГЄГўГ Г¤Г°Г ГІГҐ* ГЇГҐГ°ГҐГµГ®Г¤Г 
     private static bool IsBarier(Vector2 pos)
     {
         RaycastHit2D hit = Physics2D.BoxCast(pos, new Vector2(1,1), 0, Vector2.zero, Mathf.Infinity, 1 << layerMask); 
