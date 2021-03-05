@@ -11,7 +11,7 @@ public:
         maxSizeFifo = sizeFifo;
     }
 
-    //добавление элемента (перезапись не предусмотрена)
+    //РјРµС‚РѕРґ РґРѕР±Р°РІР»РµРЅРёСЏ (РїРµСЂРµР·Р°РїРёСЃСЊ РЅРµ РїСЂРµРґСѓСЃРјРѕС‚СЂРµРЅР°)
     bool Add(int value)
     {
         if(currentSizeFifo == maxSizeFifo)
@@ -35,6 +35,7 @@ public:
 
         return true;
     }
+    //РїРѕР»СѓС‡Р°РµРј С‚РµРєСѓС‰РёР№ СЌР»РµРјРµРЅС‚
     int Processing()
     {
         Element *temp = current;
@@ -56,6 +57,7 @@ private:
     Element *start = nullptr, *last = nullptr, *current = nullptr;
 };
 
+//С‚РµСЃС‚
 int main()
 {
     setlocale(LC_ALL, "Russian");
@@ -63,14 +65,14 @@ int main()
     int value;
     for(int i = 0; i < 4; i++)
     {
-        cout << "Введите элемент ";
+        cout << "Г‚ГўГҐГ¤ГЁГІГҐ ГЅГ«ГҐГ¬ГҐГ­ГІ ";
         cin >> value;
         fifo->Add(value);
     }
     cout << endl;
     for(int i = 0; i < 9; i++)
     {
-        cout << "Число: " << fifo->Processing() << endl;
+        cout << "Г—ГЁГ±Г«Г®: " << fifo->Processing() << endl;
     }
     return 0;
 }
