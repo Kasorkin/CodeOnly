@@ -4,24 +4,23 @@
 
 using namespace std;
 
-class Fifo
+class CircularFIFO
 {
 public:
-    Fifo(int sizeFifo = 3)
+    CircularFIFO(int sizeFifo = 3)
     {
         maxSizeFifo = sizeFifo;
         data = new int[sizeFifo];
     }
-    ~Fifo()
+    ~CircularFIFO()
     {
         delete data;
     }
-    //добавление элементов в очередь (перезапись не предусмотрена)
-    bool Add(int value)
+
+    bool Push(int value)
     {
         if(currentSizeFifo == maxSizeFifo - 1)
         {
-            cout << "Buff if full" << endl;
             return false;
         }
 
@@ -31,14 +30,12 @@ public:
         return true;
     }
     //получение конкретного элемента очереди
-    int Processing()
+    int Pop()
     {
         //если возвращаемый элемент - последний
         if(currentIndex == currentSizeFifo - 1)
         {
-            //создаем временную переменную
             int temp = currentIndex;
-            //указываем следующий возвращаемый элемент как первый
             currentIndex = 0;
             return data[temp];
         }
@@ -54,22 +51,22 @@ private:
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    Fifo *fifo = new Fifo();
+    CircularFIFO *fifo = new CircularFIFO();
     int value;
     int i = 0;
     while(i != 4)
     {
-        cout << "Введите добавляемый элемент = ";
+        cout << "Enter the element = ";
         cin >> value;
-        fifo->Add(value);
+        fifo->Push(value);
         i++;
     }
     while(true)
     {
-        cout << "Получить следующий элемент? 1 or 0" << endl;
+        cout << "Next? 1 or 0" << endl;
         cin >> value;
         if(value == 0) break;
-        cout << "Результат = " << fifo->Processing() << endl;
+        cout << "Element = " << fifo->Pop() << endl;
 
     }
     delete fifo;

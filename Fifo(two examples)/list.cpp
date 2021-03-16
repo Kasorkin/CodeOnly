@@ -3,20 +3,18 @@
 
 using namespace std;
 
-class Fifo
+class CircularFIFO
 {
 public:
-    Fifo(int sizeFifo = 3)
+    CircularFIFO(int sizeFifo = 3)
     {
         maxSizeFifo = sizeFifo;
     }
 
-    //добавление элемента (перезапись не предусмотрена)
-    bool Add(int value)
+    bool Push(int value)
     {
         if(currentSizeFifo == maxSizeFifo)
         {
-            cout << "Buff is full";
             return false;
         }
         Element *element = new Element;
@@ -35,7 +33,7 @@ public:
 
         return true;
     }
-    int Processing()
+    int Pop()
     {
         Element *temp = current;
         if(current == last)
@@ -44,33 +42,35 @@ public:
             current = temp->next;
         return temp->value;
     }
-
 private:
     struct Element
     {
         int value;
         Element *next;
     };
+    Element *start = nullptr, *last = nullptr, *current = nullptr;
+
     int maxSizeFifo;
     int currentSizeFifo = 0;
-    Element *start = nullptr, *last = nullptr, *current = nullptr;
 };
 
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    Fifo *fifo = new Fifo(4);
+    CircularFIFO *fifo = new CircularFIFO(4);
     int value;
     for(int i = 0; i < 4; i++)
     {
-        cout << "Введите элемент ";
+        cout << "Enter element ";
         cin >> value;
-        fifo->Add(value);
+        bool isPush = fifo->Push(value);
+        if(!isAdd)
+            cout << "Buff is full" << endl;
     }
     cout << endl;
     for(int i = 0; i < 9; i++)
     {
-        cout << "Число: " << fifo->Processing() << endl;
+        cout << "Element: " << fifo->Pop() << endl;
     }
     return 0;
 }
