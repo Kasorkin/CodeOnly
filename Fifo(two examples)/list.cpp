@@ -33,6 +33,7 @@ public:
 
         return true;
     }
+
     int Pop()
     {
         Element *temp = current;
@@ -54,6 +55,7 @@ private:
     int currentSizeFifo = 0;
 };
 
+//тест
 int main()
 {
     setlocale(LC_ALL, "Russian");

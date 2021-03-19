@@ -29,10 +29,9 @@ public:
 
         return true;
     }
-    //получение конкретного элемента очереди
+
     int Pop()
     {
-        //если возвращаемый элемент - последний
         if(currentIndex == currentSizeFifo - 1)
         {
             int temp = currentIndex;
@@ -67,7 +66,6 @@ int main()
         cin >> value;
         if(value == 0) break;
         cout << "Element = " << fifo->Pop() << endl;
-
     }
     delete fifo;
     return 0;
