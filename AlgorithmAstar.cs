@@ -18,7 +18,6 @@ public static class AlgorithmAstar
     private static Vector2 startPos;
     private static Vector2 endPos;
 
-    //1 - îáúåêò, 2 - ðîäèòåëü
     private static Dictionary<Vector2, Vector2> parents = new Dictionary<Vector2, Vector2>();
 
     public static Dictionary<Vector2, Vector2> SearchA(Vector2 startPosition, Vector2 endPosition)
@@ -41,7 +40,6 @@ public static class AlgorithmAstar
         int minIndex = 0;
         while (true)
         {
-            //íàõîäèì äëèíû è ìèíèìàëüíûé ýëåìåíò èç ñïèñêà îòêðûòûõ
             for (int i = 0; i < open.Count; i++)
             {
                 if (i == 0)
@@ -54,17 +52,12 @@ public static class AlgorithmAstar
                     minIndex = i;
                     min = generalValue[open[i]];
                 }
-                //Debug.Log("Äëèíà "+ open[i] + "-ãî ýëåìåíòà = " + generalValue[open[i]]);
             }
             Vector2 currentPos = open[minIndex];
-            //Debug.Log("Òåêóùàÿ ïîçèöèÿ" + currentPos);
-
-            //äîáàâèëè â çàêðûòûé è óäàëèëè ñ îòêðûòîãî
+		
             closed.Add(currentPos);
             open.RemoveAt(minIndex);
 
-            //äàííûå ñîñåäåé
-            //int index = currentPos.GetComponent<FieldData>().UniqueIndex;
             List<Vector2> neighbors = new List<Vector2>(5);
 
             //neighbors.Add(currentPos + new Vector3(-1, -1, 0));
@@ -83,42 +76,32 @@ public static class AlgorithmAstar
 
             for (int i = 0; i < 5; i++)
             {
-                //åñëè êëåòêà íåïðîõîäèìà èëè â çàêðûòîì, òî èãíîðèðóåì å¸
                 if (i == 2 || IsBarier(neighbors[i]) || closed.IndexOf(neighbors[i]) != -1)
                     continue;
-                //åñëè êëåòêà íå â îòêðûòîì ñïèñêå, òî äîáàâëÿåì å¸ òóäà è ðàññ÷èòûâàåì äëÿ íå¸ ïóòü
                 if (open.IndexOf(neighbors[i]) == -1)
                 {
                     open.Add(neighbors[i]);
-                    //òåêóùàÿ êëåòêà = ðîäèòåëüñêàÿ äëÿ ýòîé
                     parents[neighbors[i]] = currentPos;
-                    //ñ÷èòàåì ñòîèìîñòü
                     g[neighbors[i]] = mass + g[currentPos];
-                    //à òåïåðü îáùóþ ñòîèìîñòü
                     generalValue[neighbors[i]] = g[neighbors[i]] + Heuristic(neighbors[i]);
-                }//åñëè êëåòêà â îòêðûòîì ñïèñêå, òî ïðîâåðÿåì íå äåøåâëå ëè áóäåò ïóòü ÷åðåç ýòó êëåòêó
+                }
             }
-            //îñòàíîâêà åñëè äîáàâèëè íóæíóþ êëåòêó â îòêðûòûé ñïèñîê èëè ìû íå íàøëè ïóòü
             if (open.IndexOf(endPos) == -1 && open.Count == 0)
-            {
-                Debug.Log("Ïóòü íå îáíàðóæåí");
+	    {
                 return null;
             }
             else if (open.IndexOf(endPos) != -1)
             {
-                Debug.Log("Ïóòü îáíàðóæåí");
                 return ConvertWay();
             }
         }
     }
 
-    //ïåðåñîõðàíÿåì ïóòü â îáðàòíîì ïîðÿäêå
     private static Dictionary<Vector2, Vector2> ConvertWay()
     {
         Dictionary<Vector2, Vector2> newWay = new Dictionary<Vector2, Vector2>();
         Vector2 curPos = endPos;
-        //ïîñêîëüêó ìû èùåì ïóòü "ïåðåä òî÷êîé", òî ìû ïðîïóñêàåì ïîñëåäíþþ ïîçèöèþ
-        //curPos = parents[curPos];
+
         while (true)
         {
             if (curPos == startPos) break;
@@ -134,7 +117,6 @@ public static class AlgorithmAstar
         return Vector2.Distance(currentPos, endPos);
     }
 	
-	//ïðîâåðêà íà íàëè÷èå ïðåïÿòñòâèÿ â ñëåäóþùåì êâàäðàòå* ïåðåõîäà
     private static bool IsBarier(Vector2 pos)
     {
         RaycastHit2D hit = Physics2D.BoxCast(pos, new Vector2(1,1), 0, Vector2.zero, Mathf.Infinity, 1 << layerMask); 
