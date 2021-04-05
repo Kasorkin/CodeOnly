@@ -1,5 +1,4 @@
 #include <iostream>
-#include <locale.h>
 
 using namespace std;
 
@@ -33,46 +32,55 @@ public:
 
         return true;
     }
-
     int Pop()
     {
-        Element *temp = current;
+        int temp = current->value;
+        current->value = NULL;
+
         if(current == last)
             current = start;
         else
-            current = temp->next;
-        return temp->value;
+            current = current->next;
+        return temp;
     }
+
 private:
     struct Element
     {
         int value;
         Element *next;
     };
-    Element *start = nullptr, *last = nullptr, *current = nullptr;
-
     int maxSizeFifo;
     int currentSizeFifo = 0;
+    Element *start = nullptr, *last = nullptr, *current = nullptr;
 };
 
-//тест
 int main()
 {
-    setlocale(LC_ALL, "Russian");
     CircularFIFO *fifo = new CircularFIFO(4);
     int value;
-    for(int i = 0; i < 4; i++)
+
+    while(true)
     {
-        cout << "Enter element ";
+        cout << "2 to Push, 1 to Pop, 0 to End" << endl;
         cin >> value;
-        bool isPush = fifo->Push(value);
-        if(!isAdd)
-            cout << "Buff is full" << endl;
-    }
-    cout << endl;
-    for(int i = 0; i < 9; i++)
-    {
-        cout << "Element: " << fifo->Pop() << endl;
+
+        if(value == 2)
+        {
+            cout << "Enter the number = ";
+            cin >> value;
+            bool isPush = fifo->Push(value);
+            if(!isPush)
+                cout << "Buff is full" << endl;
+        }
+        else if(value == 1)
+        {
+            cout << "Result = " << fifo->Pop() << endl;
+        }
+        else
+        {
+            break;
+        }
     }
     return 0;
 }

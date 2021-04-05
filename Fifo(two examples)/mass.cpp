@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cstdlib>
-#include <locale>
 
 using namespace std;
 
@@ -19,7 +18,7 @@ public:
 
     bool Push(int value)
     {
-        if(currentSizeFifo == maxSizeFifo - 1)
+        if(currentSizeFifo == maxSizeFifo)
         {
             return false;
         }
@@ -32,14 +31,17 @@ public:
 
     int Pop()
     {
+        int temp = data[currentIndex];
+        data[currentIndex] = NULL;
+
         if(currentIndex == currentSizeFifo - 1)
-        {
-            int temp = currentIndex;
             currentIndex = 0;
-            return data[temp];
-        }
-        return data[currentIndex++];
+        else
+            ++currentIndex;
+
+        return temp;
     }
+
 private:
     int *data;
     int currentIndex = 0;
@@ -49,23 +51,31 @@ private:
 
 int main()
 {
-    setlocale(LC_ALL, "Russian");
     CircularFIFO *fifo = new CircularFIFO();
     int value;
     int i = 0;
-    while(i != 4)
-    {
-        cout << "Enter the element = ";
-        cin >> value;
-        fifo->Push(value);
-        i++;
-    }
+
     while(true)
     {
-        cout << "Next? 1 or 0" << endl;
+        cout << "2 to Push, 1 to Pop, 0 to End" << endl;
         cin >> value;
-        if(value == 0) break;
-        cout << "Element = " << fifo->Pop() << endl;
+
+        if(value == 2)
+        {
+            cout << "Enter the number = ";
+            cin >> value;
+            bool isPush = fifo->Push(value);
+            if(!isPush)
+                cout << "Buff is full" << endl;
+        }
+        else if(value == 1)
+        {
+            cout << "Result = " << fifo->Pop() << endl;
+        }
+        else
+        {
+            break;
+        }
     }
     delete fifo;
     return 0;
