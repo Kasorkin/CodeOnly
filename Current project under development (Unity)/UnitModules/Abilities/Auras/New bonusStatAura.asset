@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a2dba6109c51ac4e84dc77445830276, type: 3}
+  m_Name: New bonusStatAura
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  description: 
+  bonusStatsOwnerOfAbility: []
+  isActive: 0
+  isAura: 1
+  radiusOfImpact: 2
+  isPeriodic: 0
+  layersOfImpact:
+    serializedVersion: 2
+    m_Bits: 384
+  auraControllerObjectPrefab: {fileID: 1693446467549075629, guid: be841ea08a9c2224d8d58c5c19616392, type: 3}
+  levelsOfAbility:
+  - auraBonuses:
+    - stat: 0
+      upValue: 111
+  - auraBonuses:
+    - stat: 0
+      upValue: 1111
+  - auraBonuses:
+    - stat: 0
+      upValue: 11111
