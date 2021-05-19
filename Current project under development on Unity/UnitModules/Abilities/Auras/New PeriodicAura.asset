@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 870cde1651c6ab8409e34938053e3aef, type: 3}
+  m_Name: New PeriodicAura
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  description: 
+  bonusStatsOwnerOfAbility: []
+  isActive: 0
+  isAura: 1
+  isPeriodic: 1
+  layersOfImpact:
+    serializedVersion: 2
+    m_Bits: 128
+  auraControllerObjectPrefab: {fileID: 1693446467549075629, guid: be841ea08a9c2224d8d58c5c19616392, type: 3}
+  levelsOfAbility:
+  - stayEffects:
+    - {fileID: 11400000, guid: a2948a78203972a48839135b17b37c14, type: 2}
+    radiusOfImpact: 6
+    duration: 6
+    coldownOfImpact: 1
